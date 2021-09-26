@@ -98,7 +98,7 @@ body {
   margin-right: 0.5rem;
 }
 
-#next {
+#next, #change, #discord {
   display: none;
 }
 
