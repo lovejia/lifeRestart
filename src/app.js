@@ -215,8 +215,10 @@ class App{
                     li.removeClass('selected')
                     this.#talentSelected.delete(talent);
                     if(this.#talentSelected.size<3) {
-                        talentPage.find('#change').text('重新10连抽')
                         talentPage.find('#next').text('请选择3个')
+                    }
+                    if(this.#talentSelected.size==0) {
+                        talentPage.find('#change').text('重新10连抽')
                     }
                 } else {
                     if(this.#talentSelected.size==3) {
@@ -240,8 +242,10 @@ class App{
                     li.addClass('selected');
                     this.#talentSelected.add(talent);
                     if(this.#talentSelected.size==3) {
-                        talentPage.find('#change').text('昆仑山修士')
                         talentPage.find('#next').text('开始新人生')
+                    }
+                    if(this.#talentSelected.size>0) {
+                        talentPage.find('#change').text('昆仑山修士')
                     }
                 }
             });
@@ -279,7 +283,7 @@ class App{
         talentPage
             .find('#change')
             .click(()=>{
-                if(this.#talentSelected.size!=3) {
+                if(this.#talentSelected.size==0) {
                     talentPage.find('#talents').children().remove();
                     talentPage.find('#random').click();
                     return;
@@ -473,8 +477,9 @@ class App{
                     this.#speed = 0;
                     trajectoryPage.find('#summary').show();
                     trajectoryPage.find('#auto').hide();
+                    trajectoryPage.find('#auto').text("自动播放");
                     trajectoryPage.find('#auto2x').hide();
-                    // trajectoryPage.find('#domToImage').show();
+                    trajectoryPage.find('#domToImage').show();
                 }
                 const property = this.#life.getLastRecord();
                 $("#lifeProperty").html(`
@@ -732,6 +737,7 @@ class App{
                     this.#currentPage = 'trajectory';
                     trajectoryPage.find('#lifeTrajectory').empty();
                     trajectoryPage.find('#summary').hide();
+                    trajectoryPage.find('#domToImage').hide();
                     trajectoryPage.find('#auto').show();
                     trajectoryPage.find('#auto2x').show();
                     this.#isEnd = false;
